@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../auth/providers/auth_provider.dart';
-import '../../../shared/widgets/custom_app_bar.dart';
+import '../widgets/home_header.dart';
+import '../widgets/home_stats_section.dart';
+import '../widgets/home_menu_grid.dart';
 
-/// Screen utama aplikasi
+/// Screen utama aplikasi dengan arsitektur yang ter-refactor
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Home',
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => _handleLogout(context),
-          ),
-        ],
-      ),
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
           final user = authProvider.currentUser;
@@ -29,97 +22,36 @@ class HomeScreen extends StatelessWidget {
             );
           }
           
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Welcome message
-                Text(
-                  'Selamat datang, ${user.name}!',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  user.email,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey[600],
-                  ),
-                ),
-                const SizedBox(height: 32),
-                
-                // Menu grid
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+          return CustomScrollView(
+            slivers: [
+              HomeHeader(
+                user: user,
+                onLogout: () => _handleLogout(context),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildMenuCard(
-                        context,
-                        icon: Icons.person,
-                        title: 'Profile',
-                        onTap: () => Navigator.pushNamed(context, '/profile'),
+                      const HomeStatsSection(),
+                      const SizedBox(height: 32),
+                      Text(
+                        'Menu Utama',
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF2D3748),
+                        ),
                       ),
-                      _buildMenuCard(
-                        context,
-                        icon: Icons.settings,
-                        title: 'Settings',
-                        onTap: () => Navigator.pushNamed(context, '/settings'),
-                      ),
-                      _buildMenuCard(
-                        context,
-                        icon: Icons.notifications,
-                        title: 'Notifications',
-                        onTap: () => Navigator.pushNamed(context, '/notifications'),
-                      ),
-                      _buildMenuCard(
-                        context,
-                        icon: Icons.help,
-                        title: 'Help',
-                        onTap: () => Navigator.pushNamed(context, '/help'),
-                      ),
+                      const SizedBox(height: 16),
+                      const HomeMenuGrid(),
                     ],
                   ),
                 ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildMenuCard(
-    BuildContext context, {
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return Card(
-      elevation: 2,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 48,
-                color: Theme.of(context).primaryColor,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.titleMedium,
-                textAlign: TextAlign.center,
               ),
             ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -130,15 +62,30 @@ class HomeScreen extends StatelessWidget {
     final shouldLogout = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Konfirmasi'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: const Text(
+          'Konfirmasi',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         content: const Text('Apakah Anda yakin ingin logout?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Batal'),
+            child: Text(
+              'Batal',
+              style: TextStyle(color: Colors.grey[600]),
+            ),
           ),
-          TextButton(
+          ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF667eea),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
             child: const Text('Logout'),
           ),
         ],
