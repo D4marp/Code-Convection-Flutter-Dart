@@ -1,7 +1,7 @@
 # Flutter Clean Code & Refactoring Documentation
 
 > Dokumentasi komprehensif implementasi konsep refactoring dan clean code dalam aplikasi Flutter berdasarkan prinsip-prinsip dari [Refactoring.Guru](https://refactoring.guru/)
-
+> Dokumentasi Medium: [Medium](hhttps://damargalih12.medium.com/transformasi-kode-flutter-dari-chaos-ke-clean-architecture-dengan-refactoring-patterns-61535876c026)
 ## 📋 Daftar Isi
 
 1. [Ringkasan Implementasi Prinsip Refactoring](#1-ringkasan-implementasi-prinsip-refactoring)
@@ -1035,5 +1035,5 @@ Dokumentasi ini akan terus diperbarui seiring dengan perkembangan proyek dan pen
 
 ---
 
-*Dokumentasi ini dibuat berdasarkan prinsip-prinsip refactoring dari [Refactoring.Guru](https://refactoring.guru/) dan best practices Flutter development.*
+*Dokumentasi ini dibuat berdasarkan prinsip-prinsip refactoring dari [Refactoring.Guru](https://refactoring.guru/) ,[Jurnal Medium](hhttps://damargalih12.medium.com/transformasi-kode-flutter-dari-chaos-ke-clean-architecture-dengan-refactoring-patterns-61535876c026)dan best practices Flutter development.*
         
