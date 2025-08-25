@@ -815,7 +815,7 @@ analyzer:
 - [Dart Style Guide](https://dart.dev/guides/language/effective-dart/style)
 - [Flutter Best Practices](https://flutter.dev/docs/development/best-practices)
 - [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [Medium](hhttps://damargalih12.medium.com/transformasi-kode-flutter-dari-chaos-ke-clean-architecture-dengan-refactoring-patterns-61535876c026)
+- [Medium](https://damargalih12.medium.com/transformasi-kode-flutter-dari-chaos-ke-clean-architecture-dengan-refactoring-patterns-61535876c026)
 
 ### 🎯 Community Guidelines
 - [Flutter Community Style Guide](https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo)
